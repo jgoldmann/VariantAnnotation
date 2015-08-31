@@ -101,7 +101,7 @@
 \author{Valerie Obenchain <vobencha@fhcrc.org>}
 
 \examples{
-#  library(SIFT.Hsapiens.dbSNP137)
+#  requireNamespace(SIFT.Hsapiens.dbSNP137)
 #
 #  ## metadata
 #  metadata(SIFT.Hsapiens.dbSNP137)

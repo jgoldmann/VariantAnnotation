@@ -49,7 +49,18 @@
 
 \examples{
 ## construction
-example(VRanges)
+vr <- VRanges(seqnames = c("chr1", "chr2"),
+              ranges = IRanges(c(1, 10), c(5, 20)),
+              ref = c("T", "A"), alt = c("C", "T"),
+              refDepth = c(5, 10), altDepth = c(7, 6),
+              totalDepth = c(12, 17), sampleNames = letters[1:2],
+              hardFilters =
+                FilterRules(list(coverage = function(x) totalDepth > 10)),
+              softFilterMatrix =
+                FilterMatrix(matrix = cbind(depth = c(TRUE, FALSE)),
+                             FilterRules(depth = function(x) altDepth(x) > 6)),
+              tumorSpecific = c(FALSE, TRUE))
+
 vrl <- VRangesList(sampleA = vr, sampleB = vr)
 stackSamples(vrl)
 }

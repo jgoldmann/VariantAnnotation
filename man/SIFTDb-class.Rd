@@ -87,22 +87,23 @@
 \author{Valerie Obenchain <vobencha@fhcrc.org>}
 
 \examples{
-library(SIFT.Hsapiens.dbSNP132)
+requireNamespace("SIFT.Hsapiens.dbSNP132")
+library(AnnotationDbi)
 
 ## metadata
-metadata(SIFT.Hsapiens.dbSNP132)
+metadata(SIFT.Hsapiens.dbSNP132::SIFT.Hsapiens.dbSNP132)
 
 ## available rsid's 
-head(keys(SIFT.Hsapiens.dbSNP132))
+head(keys(SIFT.Hsapiens.dbSNP132::SIFT.Hsapiens.dbSNP132))
 
 ## for column descriptions see ?SIFTDbColumns
-columns(SIFT.Hsapiens.dbSNP132)
+columns(SIFT.Hsapiens.dbSNP132::SIFT.Hsapiens.dbSNP132)
 
 ## subset on keys and columns 
 rsids <- c("rs2142947", "rs17970171", "rs8692231", "rs3026284") 
 subst <- c("RSID", "PREDICTION", "SCORE")
-select(SIFT.Hsapiens.dbSNP132, keys=rsids, columns=subst)
-select(SIFT.Hsapiens.dbSNP132, keys=rsids[1:2])
+select(SIFT.Hsapiens.dbSNP132::SIFT.Hsapiens.dbSNP132, keys=rsids, columns=subst)
+select(SIFT.Hsapiens.dbSNP132::SIFT.Hsapiens.dbSNP132, keys=rsids[1:2])
 }
 
 \keyword{classes}

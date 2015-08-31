@@ -152,7 +152,7 @@
   isTransition(vcf, singleAltOnly=FALSE)
 
   ## Expand the CollapsedVCF to ExpandedVCF
-  evcf <- expand(vcf)
+  evcf <- IRanges::expand(vcf)
  
   ## All ref / alt pairs are now expanded and there is no need to 
   ## use 'singleAltOnly'. The return length is now 7 instead of 5:
