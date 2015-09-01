@@ -13,7 +13,7 @@ gr <- GRanges("chr22",
 test_locateVariants_upstream_downstream <- function()
 {
     loc <- locateVariants(gr, txdb, IntergenicVariants(1, 1))
-    target <- CharacterList(character(), character())
+    target <- CharacterList(character())
     checkIdentical(loc$FOLLOWID, target)
 
     loc <- locateVariants(gr, txbygene, IntergenicVariants(2, 2))
@@ -134,3 +134,20 @@ test_locateVariants_match_predictCoding <- function()
     checkIdentical(as.character(coding$VARCODON[c(1,4)]), 
                    as.character(DNAStringSet(c("AAG", "TAG"))))
 }
+
+
+test_locateVariants_intertranscriptVariants <- function()
+{
+  someInterTranscriptVariant <- VRanges("chr10", 
+                                        IRanges(48451378, 48451378), 
+                                        "A", 
+                                        "T")
+  varAnnot <- locateVariants(
+    someInterTranscriptVariant, 
+    txdb, 
+    AllVariants(promoter=PromoterVariants(upstream=0, downstream=0),  
+                intergenic=IntergenicVariants(upstream=0, downstream=0)))
+  checkEquals(length(varAnnot), 1)
+}
+
+

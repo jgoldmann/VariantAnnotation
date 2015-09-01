@@ -270,27 +270,6 @@ locateVariants(query, subject, region, ...)
   loc_int <- locateVariants(vcf, txdb, region)
   mcols(loc_int)[c("LOCATION", "PRECEDEID", "FOLLOWID")] 
 
-  ## Distance to the flanking genes can be computed for variants that 
-  ## have PRECEDEID(s) or FOLLOWID(s). Each variant can have multiple 
-  ## flanking id's so we first expand PRECEDEID and the corresponding
-  ## variant ranges.
-  p_ids <- unlist(loc_int$PRECEDEID, use.names=FALSE) 
-  exp_ranges <- rep(loc_int,  elementLengths(loc_int$PRECEDEID))
-
-  ## Provide the variant GRanges as 'x' and the TxDb annotation as 'y' 
-  ## to distance(). The 'id' and 'type' arguments describe an id found 
-  ## in the TxDb. See the ?'nearest-methods' man page in GenomicFeatures
-  ## for details.
-  p_dist <- distance(exp_ranges, txdb, id=p_ids, type="gene")
-  head(p_dist)
-
-  ## Expanded view of ranges, gene id and distance:
-  exp_ranges$PRECEDE_DIST <- p_dist
-  exp_ranges
-
-  ## Collapsed view of ranges, gene id and distance:
-  loc_int$PRECEDE_DIST <- relist(p_dist, loc_int$PRECEDEID)
-  loc_int 
 
   ## ---------------------------------------------------------------------
   ## GRangesList as subject 

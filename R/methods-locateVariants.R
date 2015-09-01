@@ -199,7 +199,8 @@ setMethod("locateVariants", c("GRanges", "TxDb",
         if (any(insertion <- width(query) == 0))
             start(query)[insertion] <- start(query)[insertion] - 1
         if (!exists("txbygene", cache, inherits=FALSE))
-            cache[["txbygene"]] <- transcriptsBy(subject, "gene")
+            cache[["txbygene"]] <- split(transcripts(subject), 
+                                         transcripts(subject)$tx_name)
 
         callGeneric(query, cache[["txbygene"]], region, ..., 
             ignore.strand=ignore.strand)
